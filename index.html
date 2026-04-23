@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GUARUNAUT — Estúdio Independente de Jogos" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="GUARUNAUT" />
+  <meta property="og:description" content="Estúdio Independente de Jogos" />
+  <meta property="og:image" content="https://guarunaut.com.br/images/guarunaut_logo.png" />
+  <meta property="og:url" content="https://guarunaut.com.br" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GUARUNAUT" />
+  <meta name="twitter:description" content="Estúdio Independente de Jogos" />
+  <meta name="twitter:image" content="https://guarunaut.com.br/images/guarunaut_logo.png" />
+
+  <title>GUARUNAUT — Estúdio de Jogos</title>
+  <link rel="icon" type="image/png" href="images/guarunaut_logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700;900&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --blue:   #1B5AA8;
+      --green:  #1E7A3E;
+      --yellow: #F4C118;
+      --red:    #C81F1F;
+      --dark:   #07091200;
+      --bg:     #060A14;
+      --text:   #E4EAF4;
+      --muted:  #7A8BA0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Background glow ── */
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 60% at 15% 55%, rgba(27, 90, 168, 0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 45% at 85% 20%, rgba(30, 122, 62, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 35% at 65% 85%, rgba(200, 31, 31, 0.09) 0%, transparent 55%),
+        var(--bg);
+    }
+
+    /* ── Stars ── */
+    #stars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      animation: twinkle var(--dur, 3s) ease-in-out infinite var(--del, 0s);
+      opacity: 0;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0;               transform: scale(1);   }
+      50%       { opacity: var(--op, 0.6); transform: scale(1.6); }
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem 5rem;
+      gap: 0;
+    }
+
+    /* ── Reveal animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes reveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.3s; }
+    .d3 { animation-delay: 0.5s; }
+    .d4 { animation-delay: 0.65s; }
+    .d5 { animation-delay: 0.8s; }
+
+    /* ── Logo ── */
+    .logo-wrap {
+      margin-bottom: 2.5rem;
+    }
+
+    .logo {
+      width: min(260px, 52vw);
+      height: auto;
+      filter:
+        drop-shadow(0 0 32px rgba(27, 90, 168, 0.55))
+        drop-shadow(0 0 70px rgba(27, 90, 168, 0.25));
+      transition: filter 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: default;
+    }
+
+    .logo:hover {
+      filter:
+        drop-shadow(0 0 50px rgba(27, 90, 168, 0.85))
+        drop-shadow(0 0 100px rgba(30, 122, 62, 0.35));
+      transform: scale(1.05) translateY(-6px);
+    }
+
+    /* ── Title ── */
+    h1 {
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.9rem, 7vw, 4rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      line-height: 1;
+      background: linear-gradient(145deg, #E4EAF4 0%, #B0C4DE 45%, #6E94C0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      margin-top: 0.65rem;
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.75rem, 2.2vw, 1rem);
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Gradient divider ── */
+    .divider {
+      margin: 2rem auto;
+      width: 56px;
+      height: 3px;
+      border-radius: 2px;
+      background: linear-gradient(90deg,
+        var(--blue)   0%,
+        var(--green)  33%,
+        var(--yellow) 66%,
+        var(--red)    100%
+      );
+      box-shadow: 0 0 12px rgba(27, 90, 168, 0.6);
+    }
+
+    /* ── Tagline ── */
+    .tagline {
+      font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 480px;
+    }
+
+    /* ── Badge ── */
+    .badge {
+      margin-top: 2.75rem;
+    }
+
+    .badge span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 1.6rem;
+      border: 1px solid rgba(27, 90, 168, 0.35);
+      border-radius: 100px;
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(176, 196, 222, 0.65);
+      background: rgba(27, 90, 168, 0.07);
+      backdrop-filter: blur(12px);
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1;   transform: scale(1);   }
+      50%       { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    /* ── Color bar (bottom) ── */
+    .color-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      z-index: 100;
+      background: linear-gradient(90deg,
+        var(--blue)   0%,
+        var(--green)  33%,
+        var(--yellow) 66%,
+        var(--red)    100%
+      );
+    }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 1rem 2rem 2.5rem;
+      text-align: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: rgba(122, 139, 160, 0.45);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+  <div id="stars"></div>
+
+  <main class="hero">
+
+    <div class="logo-wrap reveal d1">
+      <img class="logo" src="images/guarunaut_logo.png" alt="GUARUNAUT — Estúdio de Jogos" />
+    </div>
+
+    <div class="reveal d2">
+      <h1>Games que amamos jogar</h1>
+      <p class="subtitle">Feito de gamers &mdash; para gamers</p>
+    </div>
+
+    <div class="divider reveal d3"></div>
+
+    <p class="tagline reveal d4">
+      Somos um estúdio independente obcecado por diversão.<br />
+      Criamos jogos que a gente mesmo adoraria jogar.
+    </p>
+
+    <div class="badge reveal d5">
+      <span>
+        <span class="dot"></span>
+        Em desenvolvimento &mdash; Em breve
+      </span>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 GUARUNAUT &mdash; Todos os direitos reservados</p>
+  </footer>
+
+  <div class="color-bar"></div>
+
+  <script>
+    (function () {
+      const container = document.getElementById('stars');
+      const STAR_COUNT = 130;
+
+      for (let i = 0; i < STAR_COUNT; i++) {
+        const el = document.createElement('div');
+        el.className = 'star';
+        const size = 1 + Math.random() * 2;
+        el.style.cssText = [
+          `left:${(Math.random() * 100).toFixed(2)}%`,
+          `top:${(Math.random() * 100).toFixed(2)}%`,
+          `width:${size.toFixed(1)}px`,
+          `height:${size.toFixed(1)}px`,
+          `--dur:${(2 + Math.random() * 5).toFixed(1)}s`,
+          `--del:${(Math.random() * 6).toFixed(2)}s`,
+          `--op:${(0.25 + Math.random() * 0.7).toFixed(2)}`,
+        ].join(';');
+        container.appendChild(el);
+      }
+    })();
+  </script>
+
+</body>
+</html>
